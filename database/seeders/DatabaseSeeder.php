@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             IngredientSeeder::class,
             RecipeSeeder::class,
+            IngredientRecipeSeeder::class,
         ]);
     }
 }
