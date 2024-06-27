@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description');
             $table->enum('difficulty',['easy','medium','hard']);
             $table->integer('servings');
-            $table->string('category');
+            $table->enum('category',['appetizer','main course','side dish','dessert','salad','soup','beverage','snack']);
             $table->enum('restrictions',
             ['vegan','vegetarian','gluten-free'
             ])->nullable();

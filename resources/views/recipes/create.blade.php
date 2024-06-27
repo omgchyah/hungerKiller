@@ -18,6 +18,13 @@
             </select>
         </label>
         <label>
+            Category:
+            <select name="category">
+                @foreach ($categories as $category)
+                    <option value="{{ $category->value }}">{{ $category->value }}</option>
+                @endforeach
+        </label>
+        <label>
             Instrucciones:
             <input type="text" name="instructions">
         </label>
