@@ -9,10 +9,11 @@
     @livewireScripts
 </head>
 <body>
+    <div><a href="">Crear nueva receta:</a></div>
     <ul>
         @foreach ($recipes as $recipe)
             <li>
-                <a href="">
+                <a href="<?php echo WEB_ROOT;?>/recipes/{{$recipe->id}}">
                     {{ $recipe->name }}
                 </a>
             </li>
