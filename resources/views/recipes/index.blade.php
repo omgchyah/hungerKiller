@@ -1,5 +1,5 @@
 <x-main-layout>
-    <div><a href="">Crear nueva receta:</a></div>
+    <div><a href="<?php echo WEB_ROOT;?>/recipes/create">Crear nueva receta</a></div>
     <ul>
         @foreach ($recipes as $recipe)
             <li>

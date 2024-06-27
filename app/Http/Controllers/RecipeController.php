@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Difficulty;
 use App\Models\Recipe;
 use Illuminate\Http\Request;
 
@@ -20,6 +21,12 @@ class RecipeController extends Controller
         ]); */
     }
 
+    public function create()
+    {
+        $difficulties = Difficulty::cases();
+        return view('recipes.create', compact('difficulties'));
+    }    
+
     public function show($recipe)
     {
         $recipe = Recipe::find($recipe);
@@ -27,8 +34,5 @@ class RecipeController extends Controller
         return view('recipes.show', compact('recipe'));
     }
 
-    public function create()
-    {
-        
-    }
+
 }
