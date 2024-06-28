@@ -27,16 +27,19 @@
                 @foreach ($categories as $category)
                     <option value="{{ $category }}">{{ ucfirst($category) }}</option>
                 @endforeach
+            </select>
         </label>
         <label>
-            Resctrictions:
-            @foreach ($restrictions as $restriction)
-                <option value="{{ $restriction }}">{{ ucfirst($restriction) }}</option>
-            @endforeach
+            Restrictions:
+            <select name="restrictions">
+                @foreach ($restrictions as $restriction)
+                    <option value="{{ $restriction }}">{{ ucfirst($restriction) }}</option>
+                @endforeach
+            </select>
         </label>
         <label>
             Instrucciones:
-            <input type="text" name="instructions">
+            <input type="bigtext" name="instructions">
         </label>
         <label>
             Prep time:
@@ -46,5 +49,6 @@
             Cooking time:
             <input type="number" name="cooking_time">
         </label>
+        <button type="submit">Submit</button>
     </form>
 </x-main-layout>
