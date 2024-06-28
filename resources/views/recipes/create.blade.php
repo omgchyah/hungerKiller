@@ -7,26 +7,43 @@
         </label>
         <label>
             Descripción:
-            <input type="text" name="description">
+            <input type="text" name="description" required>
         </label>
         <label>
             Difficulty:
             <select name="difficulty">
                 @foreach ($difficulties as $difficulty)
-                    <option value="{{ $difficulty->value }}">{{ $difficulty->value }}</option>
+                    <option value="{{ $difficulty }}" required>{{ ucfirst($difficulty) }}</option>
                 @endforeach
             </select>
+        </label>
+        <label>
+            Servings:
+            <input type="number" name="servings">
         </label>
         <label>
             Category:
             <select name="category">
                 @foreach ($categories as $category)
-                    <option value="{{ $category->value }}">{{ $category->value }}</option>
+                    <option value="{{ $category }}">{{ ucfirst($category) }}</option>
                 @endforeach
+        </label>
+        <label>
+            @foreach ($restrictions as $restriction)
+                <option value="{{ $restriction }}">{{ ucfirst($restriction) }}</option>
+            @endforeach
         </label>
         <label>
             Instrucciones:
             <input type="text" name="instructions">
+        </label>
+        <label>
+            Prep time:
+            <input type="number" name="prep_time">
+        </label>
+        <label>
+            Cooking time:
+            <input type="number" name="cooking_time">
         </label>
     </form>
 </x-main-layout>
