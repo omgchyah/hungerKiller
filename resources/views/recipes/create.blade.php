@@ -29,6 +29,7 @@
                 @endforeach
         </label>
         <label>
+            Resctrictions:
             @foreach ($restrictions as $restriction)
                 <option value="{{ $restriction }}">{{ ucfirst($restriction) }}</option>
             @endforeach
