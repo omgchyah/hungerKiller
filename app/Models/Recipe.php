@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Recipe extends Model
 {
@@ -13,25 +14,34 @@ class Recipe extends Model
         'name', 'description', 'difficulty', 'servings', 'category', 'restrictions', 'prep_time', 'cokking_time', 'total_time'
     ];
 
+    //Method to fetch enum values
+    private static function getEnumValues($table, $column)
+    {
+        $result = DB::select("SHOW COLUMNS FROM {$table} WHERE Field = ?", [$column]);$type = $result[0]->Type;
+        preg_match('/^enum\((.*)\)$/', $type, $matches);
+        $enum = array();
+        foreach(explode(',', $matches[1]) as $value) {
+            $enum[] = trim($value, "'");
+        }
+        return $enum;
+    }
+
     // Return the possible values for the difficulty enum
     public static function getDifficultyOptions()
     {
-        return ['easy', 'medium', 'hard'];
+        return self::getEnumValues('recipes', 'difficulty');
     }
 
     // Return the possible values for the category enum
     public static function getCategoryOptions()
     {
-        return [
-            'appetizer', 'main course', 'side dish', 'dessert',
-            'salad', 'soup', 'beverage', 'snack'
-        ];
+        return self::getEnumValues('recipes', 'category');
     }
 
     // Return the possible values for the restrictions enum
     public static function getRestrictionOptions()
     {
-        return ['vegan', 'vegetarian', 'gluten-free'];
+        return self::getEnumValues('recipes', 'restrictions');
     }
     
 }

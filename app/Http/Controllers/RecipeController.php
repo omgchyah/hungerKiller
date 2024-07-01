@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Recipe;
+use App\Models\Ingredient;
 use Illuminate\Http\Request;
 
 class RecipeController extends Controller
@@ -24,13 +25,20 @@ class RecipeController extends Controller
         $difficulties = Recipe::getDifficultyOptions();
         $categories = Recipe::getCategoryOptions();
         $restrictions = Recipe::getRestrictionOptions();
+        $ingredients = Ingredient::all();
 
         return view('recipes.create', [
             'difficulties' => $difficulties,
             'categories' => $categories,
-            'restrictions' => $restrictions
+            'restrictions' => $restrictions,
+            'ingredients' => $ingredients
         ]);
-    }    
+    }
+    
+    public function store()
+    {
+        
+    }
 
     public function show($recipe)
     {
