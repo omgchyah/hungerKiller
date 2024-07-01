@@ -17,4 +17,10 @@ class Ingredient extends Model
     {
         return $this->belongsToMany(Recipe::class)->withPivot('measurement', 'quantity')->withTimestamps();
     }
+
+    //Mutador
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = ucfirst(trim($value));
+    }
 }
