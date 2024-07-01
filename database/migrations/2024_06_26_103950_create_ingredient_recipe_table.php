@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('recipe_id')->constrained()->onDelete('cascade');
             $table->foreignId('ingredient_id')->constrained()->onDelete('cascade');    
-            $table->integer('quantity');
             $table->string('measurement');
+            $table->integer('quantity');
             $table->timestamps();
         });
     }

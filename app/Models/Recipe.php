@@ -11,7 +11,7 @@ class Recipe extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'description', 'difficulty', 'servings', 'category', 'restrictions', 'prep_time', 'cokking_time', 'total_time'
+    'name', 'description', 'difficulty', 'servings', 'category', 'restrictions', 'prep_time', 'cooking_time', 'total_time', 'instructions'
     ];
 
     //Method to fetch enum values
@@ -42,6 +42,11 @@ class Recipe extends Model
     public static function getRestrictionOptions()
     {
         return self::getEnumValues('recipes', 'restrictions');
+    }
+
+    public function ingredients()
+    {
+        return $this->belongsToMany(Ingredient::class)->withPivot('measurement', 'quantity')->withTimestamps();
     }
     
 }

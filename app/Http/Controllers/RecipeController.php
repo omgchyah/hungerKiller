@@ -51,10 +51,23 @@ class RecipeController extends Controller
 
         $recipe->save();
 
-        
+        $ingredients = $request->input('ingredients', []);
+        $measurements = $request->input('measurements', []);
+        $quantities = $request->input('quantities', []);
+
+        foreach ($ingredients as $index => $ingredientName) {
+
+            // Check if the ingredient already exists
+            $ingredient = Ingredient::firstOrCreate(['name' => $ingredientName]);
+
+            // Attach the ingredient to the recipe with additional data
+            $recipe->ingredients()->attach($ingredient->id, [
+                'measurement' => $measurements[$index],
+                'quantity' => $quantities[$index],
+            ]);
+        }
 
         return redirect('/recipes');
-
     }
 
     public function show($recipe)
