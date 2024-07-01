@@ -35,9 +35,26 @@ class RecipeController extends Controller
         ]);
     }
     
-    public function store()
+    public function store(Request $request)
     {
+        $recipe = new Recipe();
+        $recipe->name = $request->name;
+        $recipe->description = $request->description;
+        $recipe->difficulty = $request->difficulty;
+        $recipe->servings = $request->servings;
+        $recipe->category = $request->category;
+        $recipe->restrictions = $request->restrictions ? $request->restrictions : null;
+        $recipe->prep_time = $request->prep_time;
+        $recipe->cooking_time = $request->cooking_time;
+        $recipe->total_time = $request->prep_time + $request->cooking_time;$request->instructions;
+        $recipe->instructions = $request->instructions;
+
+        $recipe->save();
+
         
+
+        return redirect('/recipes');
+
     }
 
     public function show($recipe)

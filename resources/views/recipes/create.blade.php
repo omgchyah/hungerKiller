@@ -1,6 +1,7 @@
 <x-main-layout>
     <h1>Crear receta</h1>
-    <form action="/recipes" method="POST">
+    <form action="<?php echo WEB_ROOT;?>/recipes" method="POST">
+        
         @csrf
 
         <div class="mb-4">
@@ -50,6 +51,7 @@
             <label>
                 Restrictions:
                 <select name="restrictions">
+                    <option value="">No restrictions</option>
                     @foreach ($restrictions as $restriction)
                         <option value="{{ $restriction }}">{{ ucfirst($restriction) }}</option>
                     @endforeach
