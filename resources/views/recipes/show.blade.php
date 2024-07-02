@@ -7,9 +7,11 @@
     <div>Difficulty: {{ $recipe->difficulty }}</div>
     <div>Category: {{ $recipe->category }}</div>
     <div>Restrictions: {{ $recipe->restrictions }}</div>
-    <div>Prep time: {{ $recipe->restrictions }}</div>
-    <div>Cooking time: {{ $recipe->restrictions }}</div>
-    <div>Restrictions: {{ $recipe->restrictions }}</div>
+    <div>Prep time: {{ $recipe->prep_time }}</div>
+    <div>Cooking time: {{ $recipe->cooking_time }}</div>
+    <div>Total time: {{ $recipe->total_time }}</div>
     <div>Instrucciones: {{ $recipe->instructions }}</div>
-    <div></div>
+    @if ($recipe->image_path)
+        <div><?php echo $recipe->image_path ?><img src="{{ asset('storage/' . $recipe->image_path) }}" alt="Recipe Image"></div>
+    @endif
 </x-main-layout>

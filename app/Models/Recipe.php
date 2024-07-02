@@ -11,7 +11,7 @@ class Recipe extends Model
     use HasFactory;
 
     protected $fillable = [
-    'name', 'description', 'difficulty', 'servings', 'category', 'restrictions', 'prep_time', 'cooking_time', 'total_time', 'instructions'
+    'name', 'description', 'difficulty', 'servings', 'category', 'restrictions', 'prep_time', 'cooking_time', 'total_time', 'instructions', 'image_path'
     ];
 
     //Method to fetch enum values

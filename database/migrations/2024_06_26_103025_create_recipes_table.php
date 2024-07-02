@@ -25,6 +25,7 @@ return new class extends Migration
             $table->integer('prep_time');
             $table->integer('cooking_time');
             $table->integer('total_time');
+            $table->string('image_path')->nullable();
             $table->timestamps();
         });
     }

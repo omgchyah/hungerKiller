@@ -1,6 +1,6 @@
 <x-main-layout>
     <h1>Crear receta</h1>
-    <form action="<?php echo WEB_ROOT;?>/recipes" method="POST">
+    <form action="<?php echo WEB_ROOT;?>/recipes" method="POST" enctype="multipart/form-data">
         
         @csrf
 
@@ -104,6 +104,13 @@
             <label>
                 Instrucciones:
                 <textarea type="bigtext" name="instructions" required></textarea>
+            </label>
+        </div>
+
+        <div class="mb-4">
+            <label>
+                Image:
+                <input type="file" name="image" accept="image/*">
             </label>
         </div>
 
