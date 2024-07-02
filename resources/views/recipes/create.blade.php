@@ -80,7 +80,7 @@
                 </label>
                 <label>
                     Quantity:
-                    <input type="number" name="quantities[]" class="block w-full mt-1 form-input" required>
+                    <input type="number" name="quantities[]" class="block w-full mt-1 form-input" min="0" required>
                 </label>
             </div>
         </div>
@@ -89,14 +89,14 @@
         <div class="mb-4">
             <label>
                 Prep time:
-                <input type="number" name="prep_time">
+                <input type="number" name="prep_time" min="0" required>
             </label>
         </div>
 
         <div class="mb-4">
             <label>
                 Cooking time:
-                <input type="number" name="cooking_time">
+                <input type="number" name="cooking_time" min="0" required>
             </label>
         </div>
 
