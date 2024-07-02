@@ -48,6 +48,39 @@ class Recipe extends Model
     {
         return $this->belongsToMany(Ingredient::class)->withPivot('measurement', 'quantity')->withTimestamps();
     }
+
+ /**
+  * Set the recipe name
+  *
+  *@param string $value
+  *@return void
+  */
+
+  public function setNameAttribute($value)
+  {
+    $this->attributes['name'] = ucfirst(strtolower($value));
+  }
+
+  public function sanitizeParagraph($value)
+  {
+    $value = trim($value);
+
+    $value = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+
+    // Normalize line breaks to a single format (e.g., \n)
+    $value = preg_replace("/\r\n|\r|\n/", "\n", $value);
+
+    return $value;
+  }
+  public function setDescriptionAttribute($value)
+  {
+    $this->attributes['description'] = $this->sanitizeParagraph($value);
+  }
+
+  public function setInstructionsAttribute($value)
+  {
+    $this->attributes['instructions'] = $this->sanitizeParagraph($value);
+  }
     
 }
 
