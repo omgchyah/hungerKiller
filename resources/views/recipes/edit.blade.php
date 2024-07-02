@@ -108,6 +108,17 @@
             </label>
         </div>
 
+        <div>
+            <h2>Ingredients:</h2>
+            <ul>
+                @foreach ($recipe->ingredients as $ingredient)
+                    <li>
+                         {{ $ingredient->pivot->quantity }} {{ $ingredient->pivot->measurement}} {{ $ingredient->name}}
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+
         <div class="mb-4">
             <label>
                 Image:
