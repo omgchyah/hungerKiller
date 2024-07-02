@@ -11,6 +11,16 @@
     <div>Cooking time: {{ $recipe->cooking_time }}</div>
     <div>Total time: {{ $recipe->total_time }}</div>
     <div>Instrucciones: {{ $recipe->instructions }}</div>
+    <div>
+        <h2>Ingredients:</h2>
+        <ul>
+            @foreach ($recipe->ingredients as $ingredient)
+                <li>
+                     {{ $ingredient->pivot->quantity }} {{ $ingredient->pivot->measurement}} {{ $ingredient->name}}
+                </li>
+            @endforeach
+        </ul>
+    </div>
     @if ($recipe->image_path)
         <div><img src="{{ asset('storage/' . $recipe->image_path) }}" alt="Recipe Image"></div>
     @endif
