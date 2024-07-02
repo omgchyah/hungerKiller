@@ -12,6 +12,6 @@
     <div>Total time: {{ $recipe->total_time }}</div>
     <div>Instrucciones: {{ $recipe->instructions }}</div>
     @if ($recipe->image_path)
-        <div><?php echo $recipe->image_path ?><img src="{{ asset('storage/' . $recipe->image_path) }}" alt="Recipe Image"></div>
+        <div><img src="{{ asset('storage/' . $recipe->image_path) }}" alt="Recipe Image"></div>
     @endif
 </x-main-layout>

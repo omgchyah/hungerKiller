@@ -9,7 +9,8 @@ class RecipeController extends Controller
 {
     public function index()
     {
-        $recipes = Recipe::all();
+        $recipes = Recipe::orderBy('name', 'asc')
+            ->paginate(10);
         
         //return $recipes;
         return view('recipes.index', compact('recipes'));

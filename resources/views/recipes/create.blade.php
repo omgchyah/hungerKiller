@@ -1,4 +1,5 @@
 <x-main-layout>
+    <a href="<?php echo WEB_ROOT;?>/recipes">Volver</a>
     <h1>Crear receta</h1>
     <form action="<?php echo WEB_ROOT;?>/recipes" method="POST" enctype="multipart/form-data">
         

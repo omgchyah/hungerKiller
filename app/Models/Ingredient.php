@@ -21,6 +21,6 @@ class Ingredient extends Model
     //Mutator
     public function setNameAttribute($value)
     {
-        $this->attributes['name'] = ucfirst(trim($value));
+        $this->attributes['name'] = ucfirst(strtolower(trim($value)));
     }
 }

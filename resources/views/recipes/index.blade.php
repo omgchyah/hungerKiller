@@ -9,5 +9,8 @@
             </li>
         @endforeach 
     </ul>
+
+    {{ $recipes->links() }}
+
 </x-main-layout>
 
