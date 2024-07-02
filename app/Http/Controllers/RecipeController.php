@@ -103,5 +103,22 @@ class RecipeController extends Controller
         return view('recipes.show', compact('recipe'));
     }
 
+    public function edit($recipe)
+    {
+        $recipe = Recipe::find($recipe);
+
+        $difficulties = Recipe::getDifficultyOptions();
+        $categories = Recipe::getCategoryOptions();
+        $restrictions = Recipe::getRestrictionOptions();
+        $ingredients = Ingredient::all();
+
+        return view('recipes.edit', [
+            'recipe' => $recipe,
+            'difficulties' => $difficulties,
+            'categories' => $categories,
+            'restrictions' => $restrictions,
+            'ingredients' => $ingredients
+        ]);
+    }
 
 }

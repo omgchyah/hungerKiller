@@ -14,4 +14,9 @@
     @if ($recipe->image_path)
         <div><img src="{{ asset('storage/' . $recipe->image_path) }}" alt="Recipe Image"></div>
     @endif
+    <div>
+        <a href="<?php echo WEB_ROOT;?>/recipes/{{ $recipe->id }}/edit">
+            Editar receta
+        </a>
+    </div>
 </x-main-layout>
