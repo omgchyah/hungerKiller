@@ -82,7 +82,6 @@ class RecipeController extends Controller
         $quantities = $request->input('quantities', []);
 
         foreach ($ingredients as $index => $ingredientName) {
-
             // Check if the ingredient already exists
             $ingredient = Ingredient::firstOrCreate(['name' => $ingredientName]);
 
@@ -119,6 +118,11 @@ class RecipeController extends Controller
             'restrictions' => $restrictions,
             'ingredients' => $ingredients
         ]);
+    }
+
+    public function update(Request $request, $recipe)
+    {
+
     }
 
 }

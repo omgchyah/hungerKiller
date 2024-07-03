@@ -17,14 +17,24 @@ class Recipe extends Model
     //Method to fetch enum values
     private static function getEnumValues($table, $column)
     {
-        $result = DB::select("SHOW COLUMNS FROM {$table} WHERE Field = ?", [$column]);$type = $result[0]->Type;
+        // Execute a query to get the column details for the specified table and column
+        $result = DB::select("SHOW COLUMNS FROM {$table} WHERE Field = ?", [$column]);
+        
+        // Extract the 'Type' attribute from the result, which contains the ENUM definition
+        $type = $result[0]->Type;
+        
+        // Use a regular expression to extract the values inside the ENUM definition
         preg_match('/^enum\((.*)\)$/', $type, $matches);
-        $enum = array();
-        foreach(explode(',', $matches[1]) as $value) {
-            $enum[] = trim($value, "'");
-        }
-        return $enum;
+        
+        // Split the extracted values into an array
+        $enumValues = explode(',', $matches[1]);
+        
+        // Trim the single quotes from each value and return the array
+        return array_map(function($value) {
+            return trim($value, "'");
+        }, $enumValues);
     }
+    
 
     // Return the possible values for the difficulty enum
     public static function getDifficultyOptions()

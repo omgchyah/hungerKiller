@@ -1,9 +1,11 @@
 <x-main-layout>
     <a href="<?php echo WEB_ROOT;?>/recipes">Volver</a>
-    <h1>Crear receta</h1>
-    <form action="<?php echo WEB_ROOT;?>/recipes" method="POST" enctype="multipart/form-data">
+    <h1>Editar receta</h1>
+    <form action="<?php echo WEB_ROOT;?>/recipes/{{$post->id}}" method="POST" enctype="multipart/form-data">
         
         @csrf
+
+        @method('PUT')
 
         <div class="mb-4">
             <label>
@@ -22,9 +24,11 @@
         <div class="mb-4">
             <label>
                 Difficulty:
-                <select name="difficulty" value="{{ $recipe->difficulty }}">
+                <select name="difficulty" required>
                     @foreach ($difficulties as $difficulty)
-                        <option value="{{ $difficulty }}" required>{{ ucfirst($difficulty) }}</option>
+                        <option value="{{ $difficulty }}">
+                            {{ ucfirst($difficulty) }}
+                        </option>
                     @endforeach
                 </select>
             </label>
@@ -60,10 +64,42 @@
             </label>
         </div>
 
+        <div class="mb-4">
+            <label>
+                Prep time:
+                <input type="number" name="prep_time" min="0" value="{{ $recipe->prep_time }}" required>
+            </label>
+        </div>
+
+        <div class="mb-4">
+            <label>
+                Cooking time:
+                <input type="number" name="cooking_time" min="0" value="{{ $recipe->cooking_time }}" required>
+            </label>
+        </div>
+
+        <div class="mb-4">
+            <label>
+                Instrucciones:
+                <textarea type="bigtext" name="instructions" required>{{ $recipe->instructions }}</textarea>
+            </label>
+        </div>
+
+        <div>
+            <h2>Ingredients:</h2>
+            <ul>
+                @foreach ($recipe->ingredients as $ingredient)
+                    <li>
+                         {{ $ingredient->pivot->quantity }} {{ $ingredient->pivot->measurement}} {{ $ingredient->name}}
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+
         <div id="ingredient-measurement-container">
             <div class="mb-4 ingredient-measurement-group">
                 <label>
-                    Ingredient:
+                    Añade más ingredientes:
                     <input type="text" name="ingredients[]" list="ingredients" class="block w-full mt-1 form-input" required>
                     <datalist id="ingredients">
                         @foreach($ingredients as $ingredient)
@@ -89,44 +125,12 @@
 
         <div class="mb-4">
             <label>
-                Prep time:
-                <input type="number" name="prep_time" min="0" required>
-            </label>
-        </div>
-
-        <div class="mb-4">
-            <label>
-                Cooking time:
-                <input type="number" name="cooking_time" min="0" required>
-            </label>
-        </div>
-
-        <div class="mb-4">
-            <label>
-                Instrucciones:
-                <textarea type="bigtext" name="instructions" required></textarea>
-            </label>
-        </div>
-
-        <div>
-            <h2>Ingredients:</h2>
-            <ul>
-                @foreach ($recipe->ingredients as $ingredient)
-                    <li>
-                         {{ $ingredient->pivot->quantity }} {{ $ingredient->pivot->measurement}} {{ $ingredient->name}}
-                    </li>
-                @endforeach
-            </ul>
-        </div>
-
-        <div class="mb-4">
-            <label>
                 Image:
                 <input type="file" name="image" accept="image/*">
             </label>
         </div>
 
-        <button type="submit">Submit</button>
+        <button type="submit">Update recipe</button>
     </form>
 
     <script>
