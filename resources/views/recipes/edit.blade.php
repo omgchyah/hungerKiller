@@ -102,7 +102,7 @@
             @endif
         </div>
 
-{{--          <div>
+          <div>
             <h2>Ingredients:</h2>
             <ul>
                 @foreach ($recipe->ingredients as $ingredient)
@@ -117,7 +117,7 @@
                     </li>
                 @endforeach
             </ul>
-        </div> --}}
+        </div>
  
         <div id="ingredient-measurement-container">
             <div class="mb-4 ingredient-measurement-group">

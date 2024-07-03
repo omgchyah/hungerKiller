@@ -185,9 +185,9 @@ class RecipeController extends Controller
         }
 
          // Remove selected ingredients
-/*         $removeIngredientIds = $request->input('remove_ingredient_ids', []);
+         $removeIngredientIds = $request->input('remove_ingredient_ids', []);
 
-        $recipe->ingredients()->detach($removeIngredientIds); */
+        $recipe->ingredients()->detach($removeIngredientIds);
     
  
          // Add new ingredients
