@@ -10,14 +10,14 @@
         <div class="mb-4">
             <label>
                 Nombre:
-                <input type="text" name="name" value="{{ $recipe->name }}">
+                <input type="text" name="name" value="{{ old('name', $recipe->name) }}">
             </label>
         </div>
 
         <div class="mb-4">
             <label>
                 Descripción:
-                <input type="text" name="description" value="{{ $recipe->description }}" required>
+                <input type="text" name="description" value="{{ old('description', $recipe->description) }}" required>
             </label>
         </div>
 
@@ -26,8 +26,8 @@
                 Difficulty:
                 <select name="difficulty" required>
                     @foreach ($difficulties as $difficulty)
-                        <option value="{{ $difficulty }}">
-                            {{ ucfirst($difficulty) }}
+                        <option value="{{ $difficulty }}" {{ $recipe->difficulty == $difficulty ? 'selected' : '' }}>
+                        {{ ucfirst($difficulty) }}
                         </option>
                     @endforeach
                 </select>
@@ -58,7 +58,9 @@
                 <select name="restrictions" value="{{ $recipe->restrictions }}">
                     <option value="">No restrictions</option>
                     @foreach ($restrictions as $restriction)
-                        <option value="{{ $restriction }}">{{ ucfirst($restriction) }}</option>
+                        <option value="{{ $restriction }}" {{ $recipe->restrictions }}>
+                        {{ ucfirst($restriction) }}
+                        </option>
                     @endforeach
                 </select>
             </label>
@@ -67,35 +69,36 @@
         <div class="mb-4">
             <label>
                 Prep time:
-                <input type="number" name="prep_time" min="0" value="{{ $recipe->prep_time }}" required>
+                <input type="number" name="prep_time" min="0" value="{{ old('prep_time', $recipe->prep_time) }}" required>
             </label>
         </div>
 
         <div class="mb-4">
             <label>
                 Cooking time:
-                <input type="number" name="cooking_time" min="0" value="{{ $recipe->cooking_time }}" required>
+                <input type="number" name="cooking_time" min="0" value="{{ old('cooking_time', $recipe->cooking_time) }}" required>
             </label>
         </div>
 
         <div class="mb-4">
             <label>
                 Instrucciones:
-                <textarea type="bigtext" name="instructions" required>{{ $recipe->instructions }}</textarea>
+                <textarea type="bigtext" name="instructions" required>{{ old('instructions', $recipe->instructions) }}</textarea>
             </label>
         </div>
 
-
         <div>
             <h2>Ingredients:</h2>
-            <ul id="existing-ingredients">
+            <ul>
                 @foreach ($recipe->ingredients as $ingredient)
                     <li>
                         <input type="hidden" name="existing_ingredient_ids[]" value="{{ $ingredient->id }}">
                         <input type="number" name="existing_quantities[]" value="{{ $ingredient->pivot->quantity }}" min="0" required>
                         <input type="text" name="existing_measurements[]" value="{{ $ingredient->pivot->measurement }}" required>
                         {{ $ingredient->name }}
-                        <button type="button" class="remove-ingredient" data-id="{{ $ingredient->id }}">Remove</button>
+                        <label>
+                            <input type="checkbox" name="remove_ingredient_ids[]" value="{{ $ingredient->id }}"> Remove
+                        </label>
                     </li>
                 @endforeach
             </ul>
@@ -126,7 +129,8 @@
                 </label>
             </div>
         </div>
-        <button type="button" id="add-ingredient-measurement" class="mt-2 btn btn-secondary">Add Another Ingredient Set</button>
+        <button type="button" onclick="addIngredient()">Add Another Ingredient Set</button>
+
 
         <div class="mb-4">
             <label>
@@ -144,24 +148,12 @@
     </form>
 
     <script>
-        document.getElementById('add-ingredient-measurement').addEventListener('click', function() {
+        function addIngredient() {
             var container = document.getElementById('ingredient-measurement-container');
             var newGroup = container.children[0].cloneNode(true);
             newGroup.querySelectorAll('input').forEach(input => input.value = '');
             newGroup.querySelectorAll('select').forEach(select => select.value = '');
             container.appendChild(newGroup);
-        });
-
-        document.querySelectorAll('.remove-ingredient').forEach(button => {
-            button.addEventListener('click', function() {
-                var ingredientId = this.dataset.id;
-                var input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = 'removed_ingredient_ids[]';
-                input.value = ingredientId;
-                this.parentElement.appendChild(input);
-                this.parentElement.style.display = 'none';
-            });
-        });
+        }
     </script>
 </x-main-layout>

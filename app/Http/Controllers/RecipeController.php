@@ -141,7 +141,7 @@ class RecipeController extends Controller
             'quantities.*' => 'required|numeric|min:0',
         ]);
 
-        $recipe = Recipe::findOrFail($recipe);
+        $recipe = Recipe::find($recipe);
 
         $recipe->update([
             'name' => $request->name,
@@ -165,23 +165,25 @@ class RecipeController extends Controller
         // Remove ingredients
         $removedIngredientIds = $request->input('removed_ingredient_ids', []);
         if (!empty($removedIngredientIds)) {
-        $recipe->ingredients()->detach($removedIngredientIds);
+            $recipe->ingredients()->detach($removedIngredientIds);
         }
 
-        //Add new ingredients
+        // Add new ingredients
         $ingredients = $request->input('ingredients', []);
         $measurements = $request->input('measurements', []);
         $quantities = $request->input('quantities', []);
 
         foreach ($ingredients as $index => $ingredientName) {
-            // Check if the ingredient already exists
-            $ingredient = Ingredient::firstOrCreate(['name' => $ingredientName]);
+            if (!empty($ingredientName)) {
+                // Check if the ingredient already exists
+                $ingredient = Ingredient::firstOrCreate(['name' => $ingredientName]);
 
-            // Attach the ingredient to the recipe with additional data
-            $recipe->ingredients()->attach($ingredient->id, [
-                'measurement' => $measurements[$index],
-                'quantity' => $quantities[$index],
-            ]);
+                // Attach the ingredient to the recipe with additional data
+                $recipe->ingredients()->attach($ingredient->id, [
+                    'measurement' => $measurements[$index],
+                    'quantity' => $quantities[$index],
+                ]);
+            }
         }
 
         return redirect("/recipes/{$recipe->id}")->with('success', 'Recipe updated successfully!');
