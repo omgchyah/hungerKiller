@@ -122,7 +122,69 @@ class RecipeController extends Controller
 
     public function update(Request $request, $recipe)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'difficulty' => 'required|in:easy,medium,hard',
+            'servings' => 'required|integer|min:1',
+            'category' => 'required|in:appetizer,main course,side dish,dessert,salad,soup,beverage,snack,breakfast',
+            'restrictions' => 'nullable|in:vegan,vegetarian,gluten-free',
+            'prep_time' => 'required|integer|min:0',
+            'cooking_time' => 'required|integer|min:0',
+            'instructions' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'ingredients' => 'required|array',
+            'ingredients.*' => 'required|string|max:255',
+            'measurements' => 'required|array',
+            'measurements.*' => 'required|string|max:255',
+            'quantities' => 'required|array',
+            'quantities.*' => 'required|numeric|min:0',
+        ]);
 
+        $recipe = Recipe::findOrFail($recipe);
+
+        $recipe->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'difficulty' => $request->difficulty,
+            'servings' => $request->servings,
+            'category' => $request->category,
+            'restrictions' => $request->restrictions ? $request->restrictions : null,
+            'prep_time' => $request->prep_time,
+            'cooking_time' => $request->cooking_time,
+            'total_time' => $request->prep_time + $request->cooking_time,
+            'instructions' => $request->instructions,
+            'image_path' => $recipe->image_path,
+        ]);
+
+        if ($request->hasFile('image')) {
+            $recipe->image_path = $request->file('image')->store('images', 'public');
+            $recipe->save();
+        }
+
+        // Remove ingredients
+        $removedIngredientIds = $request->input('removed_ingredient_ids', []);
+        if (!empty($removedIngredientIds)) {
+        $recipe->ingredients()->detach($removedIngredientIds);
+        }
+
+        //Add new ingredients
+        $ingredients = $request->input('ingredients', []);
+        $measurements = $request->input('measurements', []);
+        $quantities = $request->input('quantities', []);
+
+        foreach ($ingredients as $index => $ingredientName) {
+            // Check if the ingredient already exists
+            $ingredient = Ingredient::firstOrCreate(['name' => $ingredientName]);
+
+            // Attach the ingredient to the recipe with additional data
+            $recipe->ingredients()->attach($ingredient->id, [
+                'measurement' => $measurements[$index],
+                'quantity' => $quantities[$index],
+            ]);
+        }
+
+        return redirect("/recipes/{$recipe->id}")->with('success', 'Recipe updated successfully!');
     }
 
 }

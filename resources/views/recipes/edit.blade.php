@@ -1,7 +1,7 @@
 <x-main-layout>
     <a href="<?php echo WEB_ROOT;?>/recipes">Volver</a>
     <h1>Editar receta</h1>
-    <form action="<?php echo WEB_ROOT;?>/recipes/{{$post->id}}" method="POST" enctype="multipart/form-data">
+    <form action="<?php echo WEB_ROOT;?>/recipes/{{$recipe->id}}" method="POST" enctype="multipart/form-data">
         
         @csrf
 
@@ -85,12 +85,17 @@
             </label>
         </div>
 
+
         <div>
             <h2>Ingredients:</h2>
-            <ul>
+            <ul id="existing-ingredients">
                 @foreach ($recipe->ingredients as $ingredient)
                     <li>
-                         {{ $ingredient->pivot->quantity }} {{ $ingredient->pivot->measurement}} {{ $ingredient->name}}
+                        <input type="hidden" name="existing_ingredient_ids[]" value="{{ $ingredient->id }}">
+                        <input type="number" name="existing_quantities[]" value="{{ $ingredient->pivot->quantity }}" min="0" required>
+                        <input type="text" name="existing_measurements[]" value="{{ $ingredient->pivot->measurement }}" required>
+                        {{ $ingredient->name }}
+                        <button type="button" class="remove-ingredient" data-id="{{ $ingredient->id }}">Remove</button>
                     </li>
                 @endforeach
             </ul>
@@ -100,7 +105,7 @@
             <div class="mb-4 ingredient-measurement-group">
                 <label>
                     Añade más ingredientes:
-                    <input type="text" name="ingredients[]" list="ingredients" class="block w-full mt-1 form-input" required>
+                    <input type="text" name="ingredients[]" list="ingredients" class="block w-full mt-1 form-input">
                     <datalist id="ingredients">
                         @foreach($ingredients as $ingredient)
                             <option value="{{ $ingredient->name }}">{{ $ingredient->name }}</option>
@@ -109,7 +114,7 @@
                 </label>
                 <label>
                     Measurement:
-                    <select name="measurements[]" class="block w-full mt-1 form-input" required>
+                    <select name="measurements[]" class="block w-full mt-1 form-input">
                         <option value="gramos">Gramos</option>
                         <option value="tazas">Tazas</option>
                         <option value="cucharadas">Cucharadas</option>
@@ -117,7 +122,7 @@
                 </label>
                 <label>
                     Quantity:
-                    <input type="number" name="quantities[]" class="block w-full mt-1 form-input" min="0" required>
+                    <input type="number" name="quantities[]" class="block w-full mt-1 form-input" min="0">
                 </label>
             </div>
         </div>
@@ -128,6 +133,11 @@
                 Image:
                 <input type="file" name="image" accept="image/*">
             </label>
+            @if ($recipe->image_path)
+                <div>
+                    <img src="{{ asset('storage/' . $recipe->image_path) }}" alt="Recipe Image" style="max-width: 200px;">
+                </div>
+            @endif
         </div>
 
         <button type="submit">Update recipe</button>
@@ -137,10 +147,21 @@
         document.getElementById('add-ingredient-measurement').addEventListener('click', function() {
             var container = document.getElementById('ingredient-measurement-container');
             var newGroup = container.children[0].cloneNode(true);
-            // Clear the values of the new inputs
             newGroup.querySelectorAll('input').forEach(input => input.value = '');
             newGroup.querySelectorAll('select').forEach(select => select.value = '');
             container.appendChild(newGroup);
+        });
+
+        document.querySelectorAll('.remove-ingredient').forEach(button => {
+            button.addEventListener('click', function() {
+                var ingredientId = this.dataset.id;
+                var input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'removed_ingredient_ids[]';
+                input.value = ingredientId;
+                this.parentElement.appendChild(input);
+                this.parentElement.style.display = 'none';
+            });
         });
     </script>
 </x-main-layout>
