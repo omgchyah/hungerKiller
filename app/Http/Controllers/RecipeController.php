@@ -122,7 +122,8 @@ class RecipeController extends Controller
 
     public function update(Request $request, $recipe)
     {
-        $request->validate([
+
+/*          $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'difficulty' => 'required|in:easy,medium,hard',
@@ -132,20 +133,42 @@ class RecipeController extends Controller
             'prep_time' => 'required|integer|min:0',
             'cooking_time' => 'required|integer|min:0',
             'instructions' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'ingredients' => 'required|array',
+             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+              'ingredients' => 'required|array',
             'ingredients.*' => 'required|string|max:255',
             'measurements' => 'required|array',
             'measurements.*' => 'required|string|max:255',
             'quantities' => 'required|array',
             'quantities.*' => 'required|numeric|min:0',
-        ]);
+        ]); */
+
+         $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images', 'public');
+        }
 
         $recipe = Recipe::find($recipe);
+        
+        //$recipe->name = $request->name;
 
-        $recipe->update([
+/*         $recipe->description = $request->description;
+        $recipe->difficulty = $request->difficulty;
+        $recipe->servings = $request->servings;
+        $recipe->category = $request->category;
+        $recipe->restrictions = $request->restrictions ? $request->restrictions : null;
+        $recipe->prep_time = $request->prep_time;
+        $recipe->cooking_time = $request->cooking_time;
+        $recipe->total_time = $request->prep_time + $request->cooking_time;$request->instructions;
+        $recipe->instructions = $request->instructions;
+        $recipe->image_path = $imagePath; */
+
+        //$recipe->save();
+
+        //$recipe = Recipe::find($recipe);
+
+         $recipe->update([
             'name' => $request->name,
-            'description' => $request->description,
+             'description' => $request->description,
             'difficulty' => $request->difficulty,
             'servings' => $request->servings,
             'category' => $request->category,
@@ -154,28 +177,26 @@ class RecipeController extends Controller
             'cooking_time' => $request->cooking_time,
             'total_time' => $request->prep_time + $request->cooking_time,
             'instructions' => $request->instructions,
-            'image_path' => $recipe->image_path,
         ]);
 
-        if ($request->hasFile('image')) {
+         if ($request->hasFile('image')) {
             $recipe->image_path = $request->file('image')->store('images', 'public');
             $recipe->save();
         }
 
-        // Remove ingredients
-        $removedIngredientIds = $request->input('removed_ingredient_ids', []);
-        if (!empty($removedIngredientIds)) {
-            $recipe->ingredients()->detach($removedIngredientIds);
-        }
+         // Remove selected ingredients
+/*         $removeIngredientIds = $request->input('remove_ingredient_ids', []);
 
-        // Add new ingredients
-        $ingredients = $request->input('ingredients', []);
-        $measurements = $request->input('measurements', []);
-        $quantities = $request->input('quantities', []);
-
-        foreach ($ingredients as $index => $ingredientName) {
-            if (!empty($ingredientName)) {
-                // Check if the ingredient already exists
+        $recipe->ingredients()->detach($removeIngredientIds); */
+    
+ 
+         // Add new ingredients
+          $ingredients = $request->input('ingredients', []);
+         $measurements = $request->input('measurements', []);
+         $quantities = $request->input('quantities', []);
+ 
+         foreach ($ingredients as $index => $ingredientName) {
+            if (!empty($ingredientName) && !empty($measurements[$index]) && !empty($quantities[$index])) {
                 $ingredient = Ingredient::firstOrCreate(['name' => $ingredientName]);
 
                 // Attach the ingredient to the recipe with additional data

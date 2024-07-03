@@ -1,6 +1,7 @@
 <x-main-layout>
     <a href="<?php echo WEB_ROOT;?>/recipes">Volver</a>
     <h1>Editar receta</h1>
+
     <form action="<?php echo WEB_ROOT;?>/recipes/{{$recipe->id}}" method="POST" enctype="multipart/form-data">
         
         @csrf
@@ -10,7 +11,7 @@
         <div class="mb-4">
             <label>
                 Nombre:
-                <input type="text" name="name" value="{{ old('name', $recipe->name) }}">
+                <input type="text" name="name" value="{{ old('name', $recipe->name) }}" required>
             </label>
         </div>
 
@@ -26,8 +27,8 @@
                 Difficulty:
                 <select name="difficulty" required>
                     @foreach ($difficulties as $difficulty)
-                        <option value="{{ $difficulty }}" {{ $recipe->difficulty == $difficulty ? 'selected' : '' }}>
-                        {{ ucfirst($difficulty) }}
+                        <option value="{{ $difficulty }}" {{ $recipe->difficulty }}>
+                            {{ ucfirst($difficulty) }}
                         </option>
                     @endforeach
                 </select>
@@ -37,16 +38,18 @@
         <div class="mb-4">
             <label>
                 Servings:
-                <input type="number" name="servings" value="{{ $recipe->servings }}">
+                <input type="number" name="servings" value="{{ old('servings', $recipe->servings) }}" required>
             </label>
         </div>
 
         <div class="mb-4">
             <label>
                 Category:
-                <select name="category" value="{{ $recipe->category }}">
+                <select name="category" required>
                     @foreach ($categories as $category)
-                        <option value="{{ $category }}">{{ ucfirst($category) }}</option>
+                        <option value="{{ $category }}" {{ $recipe->category }}>
+                            {{ ucfirst($category) }}
+                        </option>
                     @endforeach
                 </select>
             </label>
@@ -55,11 +58,11 @@
         <div class="mb-4">
             <label>
                 Restrictions:
-                <select name="restrictions" value="{{ $recipe->restrictions }}">
+                <select name="restrictions">
                     <option value="">No restrictions</option>
                     @foreach ($restrictions as $restriction)
                         <option value="{{ $restriction }}" {{ $recipe->restrictions }}>
-                        {{ ucfirst($restriction) }}
+                            {{ ucfirst($restriction) }}
                         </option>
                     @endforeach
                 </select>
@@ -83,18 +86,30 @@
         <div class="mb-4">
             <label>
                 Instrucciones:
-                <textarea type="bigtext" name="instructions" required>{{ old('instructions', $recipe->instructions) }}</textarea>
+                <textarea name="instructions" required>{{ old('instructions', $recipe->instructions) }}</textarea>
             </label>
         </div>
 
-        <div>
+        <div class="mb-4">
+            <label>
+                Image:
+                <input type="file" name="image" accept="image/*">
+            </label>
+            @if ($recipe->image_path)
+                <div>
+                    <img src="{{ asset('storage/' . $recipe->image_path) }}" alt="Recipe Image" style="max-width: 200px;">
+                </div>
+            @endif
+        </div>
+
+{{--          <div>
             <h2>Ingredients:</h2>
             <ul>
                 @foreach ($recipe->ingredients as $ingredient)
                     <li>
                         <input type="hidden" name="existing_ingredient_ids[]" value="{{ $ingredient->id }}">
-                        <input type="number" name="existing_quantities[]" value="{{ $ingredient->pivot->quantity }}" min="0" required>
-                        <input type="text" name="existing_measurements[]" value="{{ $ingredient->pivot->measurement }}" required>
+                        {{ $ingredient->pivot->quantity }}
+                        {{ $ingredient->pivot->measurement }}
                         {{ $ingredient->name }}
                         <label>
                             <input type="checkbox" name="remove_ingredient_ids[]" value="{{ $ingredient->id }}"> Remove
@@ -102,12 +117,12 @@
                     </li>
                 @endforeach
             </ul>
-        </div>
-
+        </div> --}}
+ 
         <div id="ingredient-measurement-container">
             <div class="mb-4 ingredient-measurement-group">
                 <label>
-                    Añade más ingredientes:
+                    Ingredient:
                     <input type="text" name="ingredients[]" list="ingredients" class="block w-full mt-1 form-input">
                     <datalist id="ingredients">
                         @foreach($ingredients as $ingredient)
@@ -129,20 +144,7 @@
                 </label>
             </div>
         </div>
-        <button type="button" onclick="addIngredient()">Add Another Ingredient Set</button>
-
-
-        <div class="mb-4">
-            <label>
-                Image:
-                <input type="file" name="image" accept="image/*">
-            </label>
-            @if ($recipe->image_path)
-                <div>
-                    <img src="{{ asset('storage/' . $recipe->image_path) }}" alt="Recipe Image" style="max-width: 200px;">
-                </div>
-            @endif
-        </div>
+        <button type="button" id="add-ingredient-measurement" class="mt-2 btn btn-secondary">Add Another Ingredient Set</button>
 
         <button type="submit">Update recipe</button>
     </form>
