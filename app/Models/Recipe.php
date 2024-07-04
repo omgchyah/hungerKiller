@@ -92,14 +92,6 @@ class Recipe extends Model
     $this->attributes['instructions'] = $this->sanitizeParagraph($value);
   }
 
-  public function saveImage($image)
-  {
-    if ($image) {
-      $this->image_path = $image->store('images', 'public');
-      $this->save();
-    }
-  }
-
   public function removeIngredients($removeIngredientIds)
   {
     $this->ingredients()->detach($removeIngredientIds);

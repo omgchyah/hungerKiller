@@ -159,4 +159,12 @@ class RecipeController extends Controller
         return redirect("/recipes/{$recipe->id}")->with('success', 'Recipe updated successfully!');
     }
 
+    public function destroy($recipe)
+    {
+        $recipe = Recipe::find($recipe);
+        $recipe->delete();
+
+        return redirect("/recipes");
+    }
+
 }

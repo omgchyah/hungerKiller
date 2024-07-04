@@ -20,6 +20,8 @@ Route::get('/recipes/{recipe}/edit', [RecipeController::class, 'edit']);
 
 Route::put('/recipes/{recipe}', [RecipeController::class, 'update']);
 
+Route::delete('/recipes/{recipe}', [RecipeController::class, 'destroy']);
+
 
 
 

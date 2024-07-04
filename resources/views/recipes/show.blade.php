@@ -28,5 +28,14 @@
         <a href="<?php echo WEB_ROOT;?>/recipes/{{ $recipe->id }}/edit">
             Editar receta
         </a>
+        <form action="<?php echo WEB_ROOT;?>/recipes/{{$recipe->id}}" method="POST">
+
+            @csrf
+
+            @method('DELETE')
+            <button>
+                Eliminar post
+            </button>
+        </form>
     </div>
 </x-main-layout>
