@@ -11,11 +11,15 @@
 </head>
 <body>
 
-    <header>Header</header>
+    <header>
+        Header
+    </header>
 
     {{$slot}}
-
-    <footer>Footer</footer>
-
+    @livewireScripts
+    <footer>
+        Footer
+    </footer>
+    @livewireScripts
 </body>
 </html>

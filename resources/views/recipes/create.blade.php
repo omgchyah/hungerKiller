@@ -60,11 +60,10 @@
             </label>
         </div>
 
-        <div id="ingredient-measurement-container">
-            <div class="mb-4 ingredient-measurement-group">
-                <label>
-                    Ingredient:
-                    <input type="text" name="ingredients[]" list="ingredients" class="block w-full mt-1 form-input" required>
+        @livewire('create-ingredients')
+
+
+{{--                     <input type="text" name="ingredients[]" list="ingredients" class="block w-full mt-1 form-input" required>
                     <datalist id="ingredients">
                         @foreach($ingredients as $ingredient)
                             <option value="{{ $ingredient->name }}">{{ $ingredient->name }}</option>
@@ -85,7 +84,7 @@
                 </label>
             </div>
         </div>
-        <button type="button" id="add-ingredient-measurement" class="mt-2 btn btn-secondary">Add Another Ingredient Set</button>
+        <button type="button" id="add-ingredient-measurement" class="mt-2 btn btn-secondary">Add Another Ingredient Set</button> --}}
 
         <div class="mb-4">
             <label>
@@ -118,7 +117,7 @@
         <button type="submit">Submit</button>
     </form>
 
-    <script>
+{{--     <script>
         document.getElementById('add-ingredient-measurement').addEventListener('click', function() {
             var container = document.getElementById('ingredient-measurement-container');
             var newGroup = container.children[0].cloneNode(true);
@@ -127,5 +126,5 @@
             newGroup.querySelectorAll('select').forEach(select => select.value = '');
             container.appendChild(newGroup);
         });
-    </script>
+    </script> --}}
 </x-main-layout>
