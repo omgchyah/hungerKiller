@@ -22,6 +22,8 @@ Route::put('/recipes/{recipe}', [RecipeController::class, 'update']);
 
 Route::delete('/recipes/{recipe}', [RecipeController::class, 'destroy']);
 
+Route::get('recipes/search', [RecipeController::class, 'searchRecipes']);
+
 
 
 

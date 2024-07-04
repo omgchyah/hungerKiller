@@ -167,4 +167,14 @@ class RecipeController extends Controller
         return redirect("/recipes");
     }
 
+     public function search(Request $request)
+    {
+        $keyword = $request->input('keyword');
+        $recipes = Recipe::where('name', 'like', "%keyword%")
+            ->orWhere('name', 'like', '%{keyword}%')
+            ->paginate(10);
+
+            return view('recipes.index', compact('recipes'));
+    }
+
 }
