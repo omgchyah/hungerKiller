@@ -63,7 +63,8 @@ class RecipeController extends Controller
         }
 
         $recipe = new Recipe();
-        $recipe->name = $request->name;
+
+         $recipe->name = $request->name;
         $recipe->description = $request->description;
         $recipe->difficulty = $request->difficulty;
         $recipe->servings = $request->servings;
@@ -76,10 +77,6 @@ class RecipeController extends Controller
         $recipe->image_path = $imagePath;
 
         $recipe->save();
-
-/*         $ingredients = $request->input('ingredients', []);
-        $measurements = $request->input('measurements', []);
-        $quantities = $request->input('quantities', []); */
 
         foreach ($request->ingredients as $index => $ingredientName) {
             // Check if the ingredient already exists
@@ -145,48 +142,21 @@ class RecipeController extends Controller
 
         $recipe = Recipe::find($recipe);
 
-         $recipe->update([
-            'name' => $request->name,
-             'description' => $request->description,
-            'difficulty' => $request->difficulty,
-            'servings' => $request->servings,
-            'category' => $request->category,
-            'restrictions' => $request->restrictions ? $request->restrictions : null,
-            'prep_time' => $request->prep_time,
-            'cooking_time' => $request->cooking_time,
-            'total_time' => $request->prep_time + $request->cooking_time,
-            'instructions' => $request->instructions,
-        ]);
+        $recipe->update($request->only([
+            'name', 'description', 'difficulty', 'servings', 'category', 'restrictions',
+            'prep_time', 'cooking_time', 'instructions'
+        ]));
 
-         if ($request->hasFile('image')) {
-            $recipe->image_path = $request->file('image')->store('images', 'public');
-            $recipe->save();
-        }
+        $recipe->saveImage($request->file('image'));
 
-         // Remove selected ingredients
-         $removeIngredientIds = $request->input('remove_ingredient_ids', []);
-
-        $recipe->ingredients()->detach($removeIngredientIds);
+        $recipe->removeIngredients($request->input('remove_ingredient_ids', []));
     
+        $recipe->addIngredients(
+            $request->input('ingredients', []),
+            $request->input('measurements', []),
+            $request->input('quantities', [])
+        );
  
-         // Add new ingredients
-          $ingredients = $request->input('ingredients', []);
-         $measurements = $request->input('measurements', []);
-         $quantities = $request->input('quantities', []);
- 
-         foreach ($ingredients as $index => $ingredientName) {
-            //Condition to stop error from constraint
-            if (!empty($ingredientName) && !empty($measurements[$index]) && !empty($quantities[$index])) {
-                $ingredient = Ingredient::firstOrCreate(['name' => $ingredientName]);
-
-                // Attach the ingredient to the recipe with additional data
-                $recipe->ingredients()->attach($ingredient->id, [
-                    'measurement' => $measurements[$index],
-                    'quantity' => $quantities[$index],
-                ]);
-            }
-        }
-
         return redirect("/recipes/{$recipe->id}")->with('success', 'Recipe updated successfully!');
     }
 

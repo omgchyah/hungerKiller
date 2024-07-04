@@ -7,12 +7,16 @@ use Livewire\Component;
 class CreateIngredients extends Component
 {
 
-    public $ingredients = [''];
-    public $measurements = [''];
-    public $quantities = [''];
+    public $ingredients = [];
+    public $measurements = [];
+    public $quantities = [];
 
-/*         // Debugging statement
-    logger()->debug('Ingredient added', ['ingredients' => $this->ingredients]); */
+    public function mount()
+    {
+        $this->ingredients = [''];
+        $this->measurements = [''];
+        $this->quantities = [''];
+    }
 
     public function addIngredient()
     {

@@ -91,6 +91,37 @@ class Recipe extends Model
   {
     $this->attributes['instructions'] = $this->sanitizeParagraph($value);
   }
+
+  public function saveImage($image)
+  {
+    if ($image) {
+      $this->image_path = $image->store('images', 'public');
+      $this->save();
+    }
+  }
+
+  public function removeIngredients($removeIngredientIds)
+  {
+    $this->ingredients()->detach($removeIngredientIds);
+  }
+
+  public function addIngredients($ingredients, $measurements, $quantities)
+  {   
+        foreach ($ingredients as $index => $ingredientName) {
+            //Condition to stop error from constraint
+            if (!empty($ingredientName) && !empty($measurements[$index]) && !empty($quantities[$index])) {
+                    $ingredient = Ingredient::firstOrCreate(['name' => $ingredientName]);
+    
+                    // Attach the ingredient to the recipe with additional data
+                    $this->ingredients()->attach($ingredient->id, [
+                        'measurement' => $measurements[$index],
+                        'quantity' => $quantities[$index],
+                    ]);
+                }
+            }
+
+
+  }
     
 }
 

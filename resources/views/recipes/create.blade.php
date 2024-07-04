@@ -60,10 +60,12 @@
             </label>
         </div>
 
-        @livewire('create-ingredients')
 
-
-{{--                     <input type="text" name="ingredients[]" list="ingredients" class="block w-full mt-1 form-input" required>
+        <div id="ingredients-container">
+            <div class="ingredient-group">
+                <label>
+                    Ingredient:
+                    <input type="text" name="ingredients[]" list="ingredients" class="block w-full mt-1 form-input" required>
                     <datalist id="ingredients">
                         @foreach($ingredients as $ingredient)
                             <option value="{{ $ingredient->name }}">{{ $ingredient->name }}</option>
@@ -82,9 +84,12 @@
                     Quantity:
                     <input type="number" name="quantities[]" class="block w-full mt-1 form-input" min="0" required>
                 </label>
+                <button type="button" class="remove-ingredient">Remove</button>
             </div>
         </div>
-        <button type="button" id="add-ingredient-measurement" class="mt-2 btn btn-secondary">Add Another Ingredient Set</button> --}}
+
+        <button type="button" id="add-ingredient" class="mt-2 btn btn-secondary">Add Another Ingredient</button>
+
 
         <div class="mb-4">
             <label>
@@ -117,14 +122,21 @@
         <button type="submit">Submit</button>
     </form>
 
-{{--     <script>
-        document.getElementById('add-ingredient-measurement').addEventListener('click', function() {
-            var container = document.getElementById('ingredient-measurement-container');
+    <script>
+        document.getElementById('add-ingredient').addEventListener('click', function() {
+            var container = document.getElementById('ingredients-container');
             var newGroup = container.children[0].cloneNode(true);
-            // Clear the values of the new inputs
             newGroup.querySelectorAll('input').forEach(input => input.value = '');
             newGroup.querySelectorAll('select').forEach(select => select.value = '');
             container.appendChild(newGroup);
         });
-    </script> --}}
+
+        document.getElementById('ingredients-container').addEventListener('click', function(event) {
+            if (event.target && event.target.matches('button.remove-ingredient')) {
+                if (document.querySelectorAll('.ingredient-group').length > 1) {
+                    event.target.closest('.ingredient-group').remove();
+                }
+            }
+        });
+    </script>
 </x-main-layout>

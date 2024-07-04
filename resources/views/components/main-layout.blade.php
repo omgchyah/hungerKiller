@@ -7,7 +7,6 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <title>Document</title>
     @livewireStyles
-    @livewireScripts
 </head>
 <body>
 
@@ -16,10 +15,11 @@
     </header>
 
     {{$slot}}
-    @livewireScripts
+    
     <footer>
         Footer
     </footer>
+    
     @livewireScripts
 </body>
 </html>

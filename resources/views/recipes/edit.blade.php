@@ -119,10 +119,10 @@
             </ul>
         </div>
  
-        <div id="ingredient-measurement-container">
-            <div class="mb-4 ingredient-measurement-group">
+        <div id="ingredients-container">
+            <div class="ingredient-group">
                 <label>
-                    Ingredient:
+                    Add a new Ingredient:
                     <input type="text" name="ingredients[]" list="ingredients" class="block w-full mt-1 form-input">
                     <datalist id="ingredients">
                         @foreach($ingredients as $ingredient)
@@ -142,20 +142,30 @@
                     Quantity:
                     <input type="number" name="quantities[]" class="block w-full mt-1 form-input" min="0">
                 </label>
+                <button type="button" class="remove-ingredient">Remove</button>
             </div>
         </div>
-        <button type="button" id="add-ingredient-measurement" class="mt-2 btn btn-secondary">Add Another Ingredient Set</button>
+
+        <button type="button" id="add-ingredient" class="mt-2 btn btn-secondary">Add Another Ingredient</button>
 
         <button type="submit">Update recipe</button>
     </form>
 
     <script>
-        function addIngredient() {
-            var container = document.getElementById('ingredient-measurement-container');
+        document.getElementById('add-ingredient').addEventListener('click', function() {
+            var container = document.getElementById('ingredients-container');
             var newGroup = container.children[0].cloneNode(true);
             newGroup.querySelectorAll('input').forEach(input => input.value = '');
             newGroup.querySelectorAll('select').forEach(select => select.value = '');
             container.appendChild(newGroup);
-        }
+        });
+
+        document.getElementById('ingredients-container').addEventListener('click', function(event) {
+            if (event.target && event.target.matches('button.remove-ingredient')) {
+                if (document.querySelectorAll('.ingredient-group').length > 1) {
+                    event.target.closest('.ingredient-group').remove();
+                }
+            }
+        });
     </script>
 </x-main-layout>

@@ -23,4 +23,3 @@
 
     <button type="button" wire:click="addIngredient">Add Another Ingredient</button>
 </div>
-
