@@ -123,7 +123,7 @@ class RecipeController extends Controller
     public function update(Request $request, $recipe)
     {
 
-/*          $request->validate([
+          $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'difficulty' => 'required|in:easy,medium,hard',
@@ -133,38 +133,17 @@ class RecipeController extends Controller
             'prep_time' => 'required|integer|min:0',
             'cooking_time' => 'required|integer|min:0',
             'instructions' => 'required|string',
-             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-              'ingredients' => 'required|array',
-            'ingredients.*' => 'required|string|max:255',
-            'measurements' => 'required|array',
-            'measurements.*' => 'required|string|max:255',
-            'quantities' => 'required|array',
-            'quantities.*' => 'required|numeric|min:0',
-        ]); */
-
-         $imagePath = null;
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('images', 'public');
-        }
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            //'ingredients' => 'required|array',
+            //Error al validar arrays
+            //'ingredients.*' => 'required|string|max:255',
+            //'measurements' => 'required|array',
+            //'measurements.*' => 'required|string|max:255',
+            //'quantities' => 'required|array',
+            //'quantities.*' => 'required|numeric|min:0', 
+        ]);
 
         $recipe = Recipe::find($recipe);
-        
-        //$recipe->name = $request->name;
-
-/*         $recipe->description = $request->description;
-        $recipe->difficulty = $request->difficulty;
-        $recipe->servings = $request->servings;
-        $recipe->category = $request->category;
-        $recipe->restrictions = $request->restrictions ? $request->restrictions : null;
-        $recipe->prep_time = $request->prep_time;
-        $recipe->cooking_time = $request->cooking_time;
-        $recipe->total_time = $request->prep_time + $request->cooking_time;$request->instructions;
-        $recipe->instructions = $request->instructions;
-        $recipe->image_path = $imagePath; */
-
-        //$recipe->save();
-
-        //$recipe = Recipe::find($recipe);
 
          $recipe->update([
             'name' => $request->name,
@@ -196,6 +175,7 @@ class RecipeController extends Controller
          $quantities = $request->input('quantities', []);
  
          foreach ($ingredients as $index => $ingredientName) {
+            //Condition to stop error from constraint
             if (!empty($ingredientName) && !empty($measurements[$index]) && !empty($quantities[$index])) {
                 $ingredient = Ingredient::firstOrCreate(['name' => $ingredientName]);
 
