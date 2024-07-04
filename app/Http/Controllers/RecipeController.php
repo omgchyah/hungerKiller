@@ -58,6 +58,7 @@ class RecipeController extends Controller
         ]);
 
         $imagePath = null;
+
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('images', 'public');
         }
@@ -78,16 +79,11 @@ class RecipeController extends Controller
 
         $recipe->save();
 
-        foreach ($request->ingredients as $index => $ingredientName) {
-            // Check if the ingredient already exists
-            $ingredient = Ingredient::firstOrCreate(['name' => $ingredientName]);
-
-            // Attach the ingredient to the recipe with additional data
-            $recipe->ingredients()->attach($ingredient->id, [
-                'measurement' => $request->measurements[$index],
-                'quantity' => $request->quantities[$index],
-            ]);
-        }
+        $recipe->addIngredients(
+            $request->input('ingredients', []),
+            $request->input('measurements', []),
+            $request->input('quantities', [])
+        );
 
         return redirect('/recipes')->with('success', 'Recipe create successfully!');
     }
@@ -120,6 +116,8 @@ class RecipeController extends Controller
     public function update(Request $request, $recipe)
     {
 
+        $recipe = Recipe::findOrFail($recipe);
+
           $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
@@ -130,7 +128,7 @@ class RecipeController extends Controller
             'prep_time' => 'required|integer|min:0',
             'cooking_time' => 'required|integer|min:0',
             'instructions' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            //'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             //'ingredients' => 'required|array',
             //Error al validar arrays
             //'ingredients.*' => 'required|string|max:255',
@@ -140,14 +138,15 @@ class RecipeController extends Controller
             //'quantities.*' => 'required|numeric|min:0', 
         ]);
 
-        $recipe = Recipe::find($recipe);
+        if ($request->hasFile('image')) {
+            $recipe->image_path = $request->file('image')->store('images', 'public');
+            $recipe->save();
+        }
 
         $recipe->update($request->only([
             'name', 'description', 'difficulty', 'servings', 'category', 'restrictions',
-            'prep_time', 'cooking_time', 'instructions'
+            'prep_time', 'cooking_time', 'instructions', 'image'
         ]));
-
-        $recipe->saveImage($request->file('image'));
 
         $recipe->removeIngredients($request->input('remove_ingredient_ids', []));
     
