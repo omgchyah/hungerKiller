@@ -111,9 +111,19 @@ class Recipe extends Model
                     ]);
                 }
             }
-
-
   }
+
+      // Method to get unique recipe IDs from a collection of ingredients
+      public static function getUniqueRecipeIdsFromIngredients($ingredients)
+      {
+          $recipeIds = [];
+          
+          foreach ($ingredients as $ingredient) {
+              $recipeIds = array_merge($recipeIds, $ingredient->recipes()->pluck('recipes.id')->toArray());
+          }
+  
+          return array_unique($recipeIds);
+      }
     
 }
 

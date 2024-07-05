@@ -21,6 +21,16 @@ class Ingredient extends Model
     //Mutator
     public function setNameAttribute($value)
     {
-        $this->attributes['name'] = ucfirst(strtolower(trim($value)));
+        $this->attributes['name'] = ucwords(strtolower(trim($value)));
     }
+
+    public static function searchByKeywords(array $keywords)
+    {
+        // Convert keywords to lowercase
+        $keywordsArray = array_map('strtolower', $keywords);
+
+        return self::whereIn('name', $keywordsArray)->get();
+    }
+
+
 }

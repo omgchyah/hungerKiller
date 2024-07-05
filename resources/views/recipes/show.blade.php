@@ -1,7 +1,8 @@
 <x-main-layout>
     <a href="<?php echo WEB_ROOT;?>/recipes">Volver</a>
+    @if($recipe)
     <h1>Aquí se mostrará!</h1>
-    <div>Nombre: {{$recipe->name}}</div>
+    <div>Nombre: {{ $recipe->name }}</div>
     <div>Descripción: {{ $recipe->description }}</div>
     <div>Servings: {{ $recipe->servings }}</div>
     <div>Difficulty: {{ $recipe->difficulty }}</div>
@@ -38,4 +39,7 @@
             </button>
         </form>
     </div>
+    @else
+        <div>Recipes not found.</div>
+    @endif
 </x-main-layout>

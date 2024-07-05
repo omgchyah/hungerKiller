@@ -1,14 +1,19 @@
 <x-main-layout>
+    <a href="<?php echo WEB_ROOT;?>/recipes/search">Buscar</a>
+    
     <div><a href="<?php echo WEB_ROOT;?>/recipes/create">Crear nueva receta</a></div>
 
-     <div>
-        <form action="<?php echo WEB_ROOT; ?>/recipes/search" method="GET">
-            <label for="keyword">Buscar receta por palabra clave:</label>
-            <input type="text" id="keyword" name="keyword" required>
-            <button type="submit">Submit</button>
-        </form>
-        <button type="button">Submit</button>
-    </div>
+    <x-main-layout>
+        <div>
+            <form action="{{ url('/recipes/search') }}" method="GET">
+                <label for="keywords">Buscar receta por ingredientes (separados por espacio):</label>
+                <input type="text" id="keywords" name="keywords" required>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </x-main-layout>
+    
+
     <ul>
         @foreach ($recipes as $recipe)
             <li>

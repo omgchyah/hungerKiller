@@ -167,14 +167,24 @@ class RecipeController extends Controller
         return redirect("/recipes");
     }
 
-     public function search(Request $request)
+      public function search(Request $request)
     {
-        $keyword = $request->input('keyword');
-        $recipes = Recipe::where('name', 'like', "%keyword%")
-            ->orWhere('name', 'like', '%{keyword}%')
-            ->paginate(10);
 
-            return view('recipes.index', compact('recipes'));
+        $keywords = $request->input('keywords');
+        $keywordsArray = explode(' ', $keywords);
+
+        // Convert keywords to lowercase
+        $keywordsArray = array_map('strtolower', $keywordsArray);
+
+        // Find all ingredients that match the keywords
+        $ingredients = Ingredient::searchByKeywords($keywordsArray);
+
+        // Get unique recipe IDs associated with these ingredients
+        $recipeIds = Recipe::getUniqueRecipeIdsFromIngredients($ingredients);
+
+        $recipes = Recipe::whereIn('id', $recipeIds)->with('ingredients')->get();
+
+        return view('recipes.search', compact('recipes'));
     }
 
 }
