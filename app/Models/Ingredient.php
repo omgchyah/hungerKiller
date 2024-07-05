@@ -28,8 +28,15 @@ class Ingredient extends Model
     {
         // Convert keywords to lowercase
         $keywordsArray = array_map('strtolower', $keywords);
+/* 
+        return self::whereIn('name', $keywordsArray)->get(); */
 
-        return self::whereIn('name', $keywordsArray)->get();
+        // Build the query with LIKE conditions
+        return self::where(function ($query) use ($keywordsArray) {
+        foreach ($keywordsArray as $keyword) {
+            $query->orWhere('name', 'LIKE', '%' . $keyword . '%');
+            }
+            })->get();
     }
 
 
