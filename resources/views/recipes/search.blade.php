@@ -1,4 +1,5 @@
 <x-main-layout>
+    <a href="<?php echo WEB_ROOT;?>/recipes">Volver</a>
     <ul>
         @foreach ($recipes as $recipe)
             <li>

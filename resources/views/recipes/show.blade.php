@@ -1,5 +1,5 @@
 <x-main-layout>
-    <a href="<?php echo WEB_ROOT;?>/recipes">Volver</a>
+    <a href="<?php echo WEB_ROOT;?>/recipes">Volver al inicio</a>
     @if($recipe)
     <h1>Aquí se mostrará!</h1>
     <div>Nombre: {{ $recipe->name }}</div>

@@ -3,7 +3,6 @@
     
     <div><a href="<?php echo WEB_ROOT;?>/recipes/create">Crear nueva receta</a></div>
 
-    <x-main-layout>
         <div>
             <form action="{{ url('/recipes/search') }}" method="GET">
                 <label for="keywords">Buscar receta por ingredientes (separados por espacio):</label>
@@ -11,7 +10,6 @@
                 <button type="submit">Submit</button>
             </form>
         </div>
-    </x-main-layout>
     
 
     <ul>
