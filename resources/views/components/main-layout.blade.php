@@ -26,7 +26,7 @@
     <div>
         <nav class="fixed top-0 left-0 flex flex-row items-center justify-between w-screen h-20 px-4 m-0 text-sm text-black bg-gray-100 shadow-lg font-plex">
             <div class="flex items-center w-[80%] mx-2">
-                <img src='storage/images/navbar/logo2.png' class="w-12 h-auto" alt="logo">
+                <a href="<?php echo WEB_ROOT;?>/"><img src="{{ asset('storage/images/navbar/logo2.png') }}" class="w-12 h-auto" alt="logo"></a>
                 <form action="{{ url('/recipes/search') }}" method="GET" class="flex items-center w-[60%] border rounded-1 mx-2">
                     <label for="keywords" class="sr-only"></label>
                     <input 
@@ -45,7 +45,7 @@
             <a href="" class="w-[8%] mx-2 p-1 text-white text-center bg-red-500 rounded-md">Sign up</a>          
         </nav>
         <div class="flex flex-col items-center mt-20">
-            <img src='storage/images/navbar/logo4.png' class="h-auto text-center w-60" alt="logo">
+            <img src="{{ asset('storage/images/navbar/logo4.png') }}" class="w-40 h-auto text-center" alt="logo">
             <div class="w-[80%] h-0.5 mt-2 bg-black">
             </div>
         </div>
@@ -59,7 +59,7 @@
         <span>©HUNGERKILLER.COM</span>
         <span class="mx-4">|</span>
         <span>
-            Logos created with <a href="https://www.openai.com/dall-e-2/" class="text-blue-500 hover:underline">DALL-E</a>
+            Logos created with <a href="https://www.openai.com/dall-e-2/" class="text-red-500 hover:underline">DALL-E</a>
         </span>
     </footer>
     
