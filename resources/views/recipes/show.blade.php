@@ -1,6 +1,6 @@
 <x-main-layout>
     <div class="flex items-center justify-between p-4 font-plex">
-        <a href="{{ url('/recipes') }}" class="text-blue-500 hover:underline">Volver al inicio</a>
+        <a href="{{ url('/recipes') }}" class="text-red-500 hover:underline">Volver al inicio</a>
         @if($recipe)
         <div class="flex space-x-4">
             <a href="{{ url('/recipes/' . $recipe->id . '/edit') }}" class="text-blue-500 hover:underline">Editar receta</a>
