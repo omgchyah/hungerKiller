@@ -20,7 +20,6 @@
 <body class="font-sans">
 
     <header class="font-pacifico">
-        Header
     </header>
 
     <div>
