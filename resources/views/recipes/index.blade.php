@@ -1,4 +1,5 @@
 <x-main-layout>
+    
     <a href="<?php echo WEB_ROOT;?>/recipes/search">Buscar</a>
     
     <div><a href="<?php echo WEB_ROOT;?>/recipes/create">Crear nueva receta</a></div>

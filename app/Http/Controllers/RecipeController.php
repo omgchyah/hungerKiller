@@ -60,12 +60,12 @@ class RecipeController extends Controller
         $imagePath = null;
 
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('images', 'public');
+            $imagePath = $request->file('image')->store('images/recipeimages', 'public');
         }
 
         $recipe = new Recipe();
 
-         $recipe->name = $request->name;
+        $recipe->name = $request->name;
         $recipe->description = $request->description;
         $recipe->difficulty = $request->difficulty;
         $recipe->servings = $request->servings;
@@ -139,7 +139,7 @@ class RecipeController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $recipe->image_path = $request->file('image')->store('images', 'public');
+            $recipe->image_path = $request->file('image')->store('images/recipeimages', 'public');
             $recipe->save();
         }
 
