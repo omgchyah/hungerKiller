@@ -25,6 +25,7 @@ class RecipeSeeder extends Seeder
                 'prep_time' => 5,
                 'cooking_time' => 10,
                 'total_time' => 15,
+                'image_path' => 'images/recipes/vegantacos.jpg',
             ],
         ];
 
@@ -41,6 +42,7 @@ class RecipeSeeder extends Seeder
                 'prep_time' => $recipe['prep_time'],
                 'cooking_time' => $recipe['cooking_time'],
                 'total_time' => $recipe['total_time'],
+                'image_path' => $recipe['image_path'],
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

@@ -40,8 +40,8 @@
 
     <!-- Second Division: Time Information -->
     <div class="flex justify-center px-4 py-2 space-x-4 text-center font-plex">
-        <div>Prep time: {{ $recipe->prep_time }} |</div>
-        <div>Cooking time: {{ $recipe->cooking_time }}</div>
+        <div>Prep time: {{ $recipe->prep_time }}</div>
+        <div> | Cooking time: {{ $recipe->cooking_time }}</div>
         <div>| Total time: {{ $recipe->total_time }}</div>
     </div>
     

@@ -24,9 +24,9 @@
 
     <div>
         <nav class="fixed top-0 left-0 flex flex-row items-center justify-between w-screen h-20 px-4 m-0 text-sm text-black bg-gray-100 shadow-lg font-plex">
-            <div class="flex items-center w-[80%] mx-2">
+            <div class="flex items-center w-full sm:w-[80%] mx-2 space-x-2">
                 <a href="<?php echo WEB_ROOT;?>/"><img src="{{ asset('storage/images/navbar/logo2.png') }}" class="w-12 h-auto" alt="logo"></a>
-                <form action="{{ url('/recipes/search') }}" method="GET" class="flex items-center w-[60%] border rounded-1 mx-2">
+                <form action="{{ url('/recipes/search') }}" method="GET" class="flex items-center flex-grow border rounded-1">
                     <label for="keywords" class="sr-only"></label>
                     <input 
                         type="text" 
@@ -40,11 +40,13 @@
                     <button type="submit" class="p-2 text-white bg-red-500 rounded-r">Search</button>
                 </form>
             </div>
-            <a href="" class="w-[8%] ml-6 p-1 text-red-500 text-center bg-white border-2 border-red-500 rounded-md">Sign in</a>
-            <a href="" class="w-[8%] mx-2 p-1 text-white text-center bg-red-500 rounded-md">Sign up</a>          
+            <div class="flex space-x-2">
+                <a href="" class="w-auto p-1 text-center text-red-500 bg-white border-2 border-red-500 rounded-md">Sign in</a>
+                <a href="" class="w-auto p-1 text-center text-white bg-red-500 rounded-md">Sign up</a>          
+            </div>
         </nav>
-        <div class="flex flex-col items-center mt-20">
-            <img src="{{ asset('storage/images/navbar/logo4.png') }}" class="w-40 h-auto text-center" alt="logo">
+        <div class="flex flex-col items-center mt-40">
+            <img src="{{ asset('storage/images/navbar/logo3.png') }}" class="w-40 h-auto text-center" alt="logo">
             <div class="w-[80%] h-0.5 mt-2 bg-black">
             </div>
         </div>
