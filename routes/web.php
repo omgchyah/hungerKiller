@@ -17,6 +17,12 @@ Route::get('/recipes/create', [RecipeController::class, 'create']);
 
  Route::get('/recipes/search', [RecipeController::class, 'search']);
 
+ Route::get('/recipes/vegan', [RecipeController::class, 'veganRecipes']);
+
+Route::get('/recipes/easy', [RecipeController::class, 'easyRecipes']);
+
+Route::get('/recipes/gluten-free', [RecipeController::class, 'glutenFreeRecipes']);
+
 Route::get('/recipes/{recipe}', [RecipeController::class, 'show']);
 
 Route::post('/recipes', [RecipeController::class, 'store']);

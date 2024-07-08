@@ -1,14 +1,14 @@
 <x-main-layout>
     <div class="flex items-center justify-between p-4 font-plex">
-        <a href="{{ url('/recipes') }}" class="text-red-500 hover:underline">Volver al inicio</a>
+        <a href="{{ url('/recipes') }}" class="text-red-500 hover:underline">Go back</a>
         @if($recipe)
         <div class="flex space-x-4">
-            <a href="{{ url('/recipes/' . $recipe->id . '/edit') }}" class="text-blue-500 hover:underline">Editar receta</a>
+            <a href="{{ url('/recipes/' . $recipe->id . '/edit') }}" class="text-red-500 hover:underline">Update recipe</a>
             <form action="{{ url('/recipes/' . $recipe->id) }}" method="POST" onsubmit="return confirmDelete()">
                 @csrf
                 @method('DELETE')
                 <button class="text-red-500 hover:underline">
-                    Eliminar post
+                    Delete recipe
                 </button>
             </form>
         </div>
@@ -17,10 +17,10 @@
 
     @if($recipe)
     <!-- First Division: Image and Basic Info -->
-    <div class="flex justify-around p-4 mb-4">
+    <div class="flex justify-around p-4 mb-2 h-96 lg:h-screen">
         <div class="w-1/2 pr-4">
             @if ($recipe->image_path)
-                <img src="{{ asset('storage/' . $recipe->image_path) }}" alt="Recipe Image" class="w-full h-auto">
+                <img src="{{ asset('storage/' . $recipe->image_path) }}" alt="Recipe Image" class="object-cover object-center w-full h-full">
             @else
                 <div class="w-full h-auto bg-gray-200"></div>
             @endif
@@ -39,7 +39,7 @@
     <div class="w-full h-0.5 mx-auto my-1 bg-black"></div>
 
     <!-- Second Division: Time Information -->
-    <div class="flex justify-center px-4 py-2 space-x-4 text-center font-plex">
+    <div class="flex justify-center px-4 py-0 space-x-4 text-center font-plex">
         <div>Prep time: {{ $recipe->prep_time }}</div>
         <div> | Cooking time: {{ $recipe->cooking_time }}</div>
         <div>| Total time: {{ $recipe->total_time }}</div>

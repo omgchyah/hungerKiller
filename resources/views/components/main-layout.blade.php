@@ -45,8 +45,8 @@
                 <a href="" class="w-auto p-1 text-center text-white bg-red-500 rounded-md">Sign up</a>          
             </div>
         </nav>
-        <div class="flex flex-col items-center mt-40">
-            <img src="{{ asset('storage/images/navbar/logo3.png') }}" class="w-40 h-auto text-center" alt="logo">
+        <div class="flex flex-col items-center p-4 mt-20">
+            <a href="<?php echo WEB_ROOT;?>/"><img src="{{ asset('storage/images/navbar/logo3.png') }}" class="w-40 h-auto text-center" alt="logo"></a>
             <div class="w-[80%] h-0.5 mt-2 bg-black">
             </div>
         </div>
@@ -68,7 +68,7 @@
 
     <script>
         function clearInput(input) {
-            if (input.value === 'Write down any ingredients') {
+            if (input.value === 'Write down your ingredients') {
                 input.value = '';
                 input.classList.remove('text-gray-500');
             }
@@ -76,7 +76,7 @@
     
         function restoreInput(input) {
             if (input.value === '') {
-                input.value = 'Write down any ingredients';
+                input.value = 'Write down your ingredients';
                 input.classList.add('text-gray-500');
             }
         }

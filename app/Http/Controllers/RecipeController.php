@@ -184,7 +184,25 @@ class RecipeController extends Controller
 
         $recipes = Recipe::whereIn('id', $recipeIds)->with('ingredients')->get();
 
-        return view('recipes.search', compact('recipes'));
+        return view('recipes.search', ['recipes' => $recipes, 'title' => 'Search Results']);
+    }
+
+    public function veganRecipes()
+    {
+        $recipes = Recipe::where('restriction', 'vegan')->paginate(10);
+        return view('recipes.search', ['recipes' => $recipes, 'title' => 'Easy Recipes']);
+    }
+
+    public function easyRecipes()
+    {
+        $recipes = Recipe::where('difficulty', 'easy')->paginate(10);
+        return view('recipes.search', ['recipes' => $recipes, 'title' => 'Easy Recipes']);
+    }
+
+    public function glutenFreeRecipes()
+    {
+        $recipes = Recipe::where('restriction', 'gluten-free')->paginate(10);
+        return view('recipes.search', ['recipes' => $recipes, 'title' => 'Gluten-Free Recipes']);
     }
 
 }
