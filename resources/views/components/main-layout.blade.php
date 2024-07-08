@@ -32,7 +32,7 @@
                         type="text" 
                         id="keywords" 
                         name="keywords" 
-                        class="flex-grow p-2 text-gray-300 rounded-l" 
+                        class="flex-grow p-2 text-gray-500 rounded-l" 
                         value="Write down any ingredients" 
                         onclick="clearInput(this)" 
                         onblur="restoreInput(this)" 

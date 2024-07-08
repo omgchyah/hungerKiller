@@ -81,6 +81,36 @@ class IngredientRecipeSeeder extends Seeder
                 ['ingredient_id' => 21, 'quantity' => 1, 'measurement' => 'tbsp'], // Fresh cilantro leaves
                 ['ingredient_id' => 22, 'quantity' => 2, 'measurement' => 'tbsp'], // Fresh lime juice
             ],
+            'The best Veggie Burger!' => [
+                ['ingredient_id' => 1, 'quantity' => 2, 'measurement' => 'tbsp'], // Oil
+                ['ingredient_id' => 2, 'quantity' => 1, 'measurement' => 'unit'], // Yellow onion
+                ['ingredient_id' => 3, 'quantity' => 3, 'measurement' => 'cloves'], // Garlic
+                ['ingredient_id' => 7, 'quantity' => 1, 'measurement' => 'tsp'], // Paprika
+                ['ingredient_id' => 23, 'quantity' => 2, 'measurement' => 'cup'], // Mushrooms
+                ['ingredient_id' => 24, 'quantity' => 2, 'measurement' => 'tbsp'], // Tamari
+                ['ingredient_id' => 25, 'quantity' => 2, 'measurement' => 'tbsp'], // Balsamic vinegar
+                ['ingredient_id' => 26, 'quantity' => 1, 'measurement' => 'tsp'], // Sriracha
+                ['ingredient_id' => 27, 'quantity' => 1, 'measurement' => 'cup'], // Walnuts
+                ['ingredient_id' => 28, 'quantity' => 2, 'measurement' => 'tbsp'], // Flaxseeds
+                ['ingredient_id' => 29, 'quantity' => 1, 'measurement' => 'cup'], // Brown rice
+                ['ingredient_id' => 30, 'quantity' => 1, 'measurement' => 'cup'], // Panko bread crumbs
+                ['ingredient_id' => 31, 'quantity' => 1, 'measurement' => 'tbsp'], // Worcestershire sauce
+                ['ingredient_id' => 32, 'quantity' => 4, 'measurement' => 'units'], // Buns
+                ['ingredient_id' => 10, 'quantity' => 1, 'measurement' => 'tsp'], // Salt
+            ],
+            'The Best Brownies!' => [
+                ['ingredient_id' => 33, 'quantity' => 2.5, 'measurement' => 'sticks'], // Unsalted butter
+                ['ingredient_id' => 34, 'quantity' => 225, 'measurement' => 'g'], // 60-70% cacao chocolate
+                ['ingredient_id' => 35, 'quantity' => 90, 'measurement' => 'grams'], // Unsweetened cocoa powder
+                ['ingredient_id' => 36, 'quantity' => 1, 'measurement' => 'tbsp'], // Espresso powder
+                ['ingredient_id' => 37, 'quantity' => 2, 'measurement' => 'cup'], // Granulated sugar
+                ['ingredient_id' => 20, 'quantity' => 0.5, 'measurement' => 'cup'], // Brown sugar
+                ['ingredient_id' => 38, 'quantity' => 2, 'measurement' => 'tsp'], // Vanilla extract
+                ['ingredient_id' => 42, 'quantity' => 2, 'measurement' => 'tsp'], // Kosher salt
+                ['ingredient_id' => 40, 'quantity' => 6, 'measurement' => 'units'], // Large eggs
+                ['ingredient_id' => 41, 'quantity' => 1, 'measurement' => 'cup'], // All-purpose flour
+                ['ingredient_id' => 39, 'quantity' => 1, 'measurement' => 'tsp'], // Flaky sea salt
+            ],
         ];
 
         // Loop through each recipe and insert ingredients
