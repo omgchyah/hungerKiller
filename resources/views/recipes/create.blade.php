@@ -79,12 +79,13 @@
                 <label class="block mt-2 font-bold">
                     Measurement:
                     <select name="measurements[]" class="block w-full mt-1 bg-gray-100 border border-gray-300 rounded" required>
-                        <option value="gramos">Grams</option>
-                        <option value="tazas">Mililiters</option>
-                        <option value="cucharadas">Tablespoon(s)</option>
-                        <option value="cucharadas">Teaspoon(s)</option>
-                        <option value="cucharadas">Cup(s)</option>
-                        <option value="cucharadas">Unit(s)</option>
+                        <option value="grams">Grams</option>
+                        <option value="mililiters">Mililiters</option>
+                        <option value="tbsp">Tsp(s)</option>
+                        <option value="tsp">Tsp(s)</option>
+                        <option value="cup">Cup(s)</option>
+                        <option value="units">Unit(s)</option>
+                        <option value="clove">Clove(s)</option>
                     </select>
                 </label>
                 <label class="block mt-2 font-bold">

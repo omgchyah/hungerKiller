@@ -31,8 +31,14 @@
             <div class="mt-2 font-plex">Servings: {{ $recipe->servings }}</div>
             <div class="mt-2 font-plex">Difficulty: {{ $recipe->difficulty }}</div>
             <div class="mt-2 font-plex">Category: {{ $recipe->category }}</div>
-            <div class="mt-2 font-plex">Restrictions: {{ $recipe->restrictions }}</div>
-        </div>
+
+            @if ($recipe->restrictions)
+                <div class="mt-2 font-plex">Restrictions: {{ $recipe->restrictions }}</div>
+                </div>
+            @else 
+                <div class="mt-2 font-plex">No restrictions.
+                </div>
+            @endif
     </div>
 
     <!-- Thin Black Bar -->

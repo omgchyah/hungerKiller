@@ -25,7 +25,17 @@ class IngredientSeeder extends Seeder
             'Tortillas',
             'Salt',
             'Guacamole',
-            'Cilantro'
+            'Cilantro',
+            'Chicken cutlets',
+            'Black pepper',
+            'Jalapeño',
+            'Ginger',
+            'Tomatoes',
+            'Tomato paste',
+            'Unsweetened coconut milk',
+            'Brown sugar',
+            'Fresh cilantro leaves',
+            'fresh lime juice',
         ];
 
         foreach($ingredients as $ingredient)

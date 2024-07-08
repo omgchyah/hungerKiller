@@ -11,7 +11,7 @@ class IngredientRecipeSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
+/*     public function run(): void
     {
         // Find the recipe ID for 'Vegan Tacos'
         $recipeId = DB::table('recipes')->where('name', 'Vegan tacos')->value('id');
@@ -44,5 +44,62 @@ class IngredientRecipeSeeder extends Seeder
             ]);
         }
 
+    } */
+
+    public function run(): void
+    {
+        // Define ingredients for each recipe by recipe name
+        $recipesIngredients = [
+            'Vegan tacos' => [
+                ['ingredient_id' => 1, 'quantity' => 1, 'measurement' => 'tbsp'], // Oil
+                ['ingredient_id' => 2, 'quantity' => 1, 'measurement' => 'unit'], // Yellow onion
+                ['ingredient_id' => 3, 'quantity' => 4, 'measurement' => 'cloves'], // Garlic
+                ['ingredient_id' => 4, 'quantity' => 2, 'measurement' => 'cup'], // Vegetable broth
+                ['ingredient_id' => 5, 'quantity' => 1, 'measurement' => 'cup'], // Textured vegetable protein
+                ['ingredient_id' => 6, 'quantity' => 2, 'measurement' => 'tsp'], // Chili powder
+                ['ingredient_id' => 7, 'quantity' => 1, 'measurement' => 'tsp'], // Paprika
+                ['ingredient_id' => 8, 'quantity' => 1, 'measurement' => 'tsp'], // Cumin
+                ['ingredient_id' => 9, 'quantity' => 8, 'measurement' => 'units'], // Tortillas
+                ['ingredient_id' => 10, 'quantity' => 1, 'measurement' => 'tsp'], // Salt
+                ['ingredient_id' => 11, 'quantity' => 1, 'measurement' => 'cup'], // Guacamole
+                ['ingredient_id' => 12, 'quantity' => 1, 'measurement' => 'tbsp'], // Cilantro
+            ],
+            'One-Pan Coconut-Lime Chicken' => [
+                ['ingredient_id' => 13, 'quantity' => 6, 'measurement' => 'units'], // Chicken cutlets
+                ['ingredient_id' => 14, 'quantity' => 1, 'measurement' => 'tsp'], // Black pepper
+                ['ingredient_id' => 10, 'quantity' => 1, 'measurement' => 'tsp'], // Salt
+                ['ingredient_id' => 1, 'quantity' => 2, 'measurement' => 'tbsp'], // Oil
+                ['ingredient_id' => 2, 'quantity' => 1, 'measurement' => 'unit'], // Yellow onion
+                ['ingredient_id' => 3, 'quantity' => 3, 'measurement' => 'cloves'], // Garlic
+                ['ingredient_id' => 15, 'quantity' => 1,
+                 'measurement' => 'unit'], // Jalapeño
+                ['ingredient_id' => 16, 'quantity' => 1, 'measurement' => 'tbsp'], // Ginger
+                ['ingredient_id' => 17, 'quantity' => 2, 'measurement' => 'units'], // Tomatoes
+                ['ingredient_id' => 18, 'quantity' => 1, 'measurement' => 'tbsp'], // Tomato paste
+                ['ingredient_id' => 19, 'quantity' => 1, 'measurement' => 'cup'], // Unsweetened coconut milk
+                ['ingredient_id' => 20, 'quantity' => 2, 'measurement' => 'tbsp'], // Brown sugar
+                ['ingredient_id' => 21, 'quantity' => 1, 'measurement' => 'tbsp'], // Fresh cilantro leaves
+                ['ingredient_id' => 22, 'quantity' => 2, 'measurement' => 'tbsp'], // Fresh lime juice
+            ],
+        ];
+
+        // Loop through each recipe and insert ingredients
+        foreach ($recipesIngredients as $recipeName => $ingredients) {
+            // Find the recipe ID for the current recipe name
+            $recipeId = DB::table('recipes')->where('name', $recipeName)->value('id');
+
+            // Insert the ingredients for the current recipe
+            foreach ($ingredients as $ingredient) {
+                DB::table('ingredient_recipe')->insert([
+                    'recipe_id' => $recipeId,
+                    'ingredient_id' => $ingredient['ingredient_id'],
+                    'quantity' => $ingredient['quantity'],
+                    'measurement' => $ingredient['measurement'],
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
+        }
     }
+
 }
