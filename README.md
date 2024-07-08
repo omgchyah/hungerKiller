@@ -7,6 +7,23 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## About this project
+
+Hunger Killer is a web application to create, search, modify and delete recipes.
+The idea is to allow every user to sign in and manage their own recipes that they can share with the rest.
+
+To migrate table, write on the terminal:
+
+php artisan migrate:fresh
+
+To seed your database tables:
+
+php artisan db:seed
+
+This will allow you to navigate through the site and test it!
+
+User Interface coming soon!
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
