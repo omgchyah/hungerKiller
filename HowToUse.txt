@@ -1,0 +1,5 @@
+To seed your database, write the following commands on the terminal:
+
+php artisan migrate:fresh
+
+php artisan db:seed

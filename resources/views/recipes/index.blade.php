@@ -28,7 +28,7 @@
     <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4 p-4 w-full md:w-[80%] mb-16 font-plex">
         @foreach ($recipes as $recipe)
             <div class="flex items-start mb-4">
-                <img src="{{ asset('storage/' . $recipe->image_path) }}" alt="{{ $recipe->name }}" class="object-cover object-center w-1/2 mr-4 h-3/5 bg-blend-lighten">
+                <img src="{{ asset('storage/' . $recipe->image_path) }}" alt="{{ $recipe->name }}" class="object-cover object-center w-1/2 h-full mr-4 bg-blend-lighten">
                 <div class="w-1/2">
                     <div class="font-bold text-black">{{ $recipe->name }}</div>
                     <div class="text-black">{{ $recipe->description }}</div>
