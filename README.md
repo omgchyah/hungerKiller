@@ -12,17 +12,33 @@
 Hunger Killer is a web application to create, search, modify and delete recipes.
 The idea is to allow every user to sign in and manage their own recipes that they can share with the rest.
 
-To migrate table, write on the terminal:
-
-php artisan migrate:fresh
-
-To seed your database tables:
-
-php artisan db:seed
-
-This will allow you to navigate through the site and test it!
-
 User Interface coming soon!
+
+## Prerequisites
+
+- PHP >= 7.4
+- Composer
+- MySQL
+
+## Installation
+
+1. Clone the repository:
+   git clone https://github.com/omgchyah/hungerKiller/tree/develop
+
+2. Update your .env file with your credentials:
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=hungerkiller
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+
+3. Run migrations and seeders
+
+php artisan migrate --seed
+
+
 
 ## About Laravel
 
