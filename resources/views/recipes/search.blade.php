@@ -3,12 +3,13 @@
         <a href="{{ url('/recipes') }}" class="text-red-500 hover:underline">Go back</a>
     </div>
 
+    <div class="flex flex-col items-center p-4">
+         <h2 class="text-xl font-bold text-red-500 place-content-center font-plex place-items-center">{{ $title }}</h2>
+    </div>
+
 <!-- Recipes List -->
 <div class="flex justify-center">
     <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4 p-4 w-full md:w-[80%] mb-16 font-plex">
-
-         <h2 clas="text-xl folt-bold">{{ $title }}</h2>
-
         @foreach ($recipes as $recipe)
             <div class="flex items-start mb-4">
                 <img src="{{ asset('storage/' . $recipe->image_path) }}" alt="{{ $recipe->name }}" class="object-cover object-center w-1/2 mr-4 h-3/5 bg-blend-lighten">

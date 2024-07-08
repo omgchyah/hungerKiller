@@ -1,22 +1,22 @@
 <x-main-layout>
     
-    <!-- Top Section with Four Images and Text -->
+    <!-- Images and text -->
     <div class="grid justify-center grid-cols-1 gap-4 p-4 mx-20 md:grid-cols-2 lg:grid-cols-4 font-plex">
         <div class="flex flex-col items-center">
-            <img src="{{ asset('path_to_your_image1.jpg') }}" alt="Create new recipe" class="flex flex-col items-center w-full h-auto">
+            <img src="{{ asset('storage/images/recipes/allfood.png') }}" alt="Create new recipe" class="flex flex-col items-center object-cover w-full h-[85%]">
             <a href="{{ url('/recipes/create') }}" class="mt-2 text-center text-red-500 hover:underline">Create new recipe</a>
         </div>
         <div class="flex flex-col items-center">
-            <img src="{{ asset('path_to_your_image2.jpg') }}" alt="Find recipes" class="flex flex-col items-center w-full h-auto">
+            <img src="{{ asset('storage/images/recipes/vegetarian.png') }}" alt="Find recipes" class="flex flex-col items-center object-cover w-full h-[85%]"> 
             <a href="{{ url('/recipes/easy') }}" class="mt-2 text-center text-red-500 hover:underline">Find all our easy recipes here!</a>
         </div>
         <div class="flex flex-col items-center">
-            <img src="{{ asset('path_to_your_image3.jpg') }}" alt="Vegan recipes" class="flex flex-col items-center w-full h-auto">
-            <a href="{{ url('/recipes/vegan') }}" class="mt-2 text-center text-red-500 hover:underline">Vegan recipes this way!</a>
+            <img src="{{ asset('storage/images/recipes/veganfood.png') }}" alt="Vegan recipes" class="flex flex-col items-center object-cover w-full h-[85%]">
+            <a href="{{ url('/recipes/vegan') }}" class="mt-2 text-center text-red-500 hover:underline">Vegan recipes this way!</a>    
         </div>
         <div class="flex flex-col items-center">
-            <img src="{{ asset('path_to_your_image4.jpg') }}" alt="Gluten-free recipes" class="flex flex-col items-center w-full h-auto">
-            <a href="{{ url('/recipes/gluten-free') }}" class="mt-2 text-center text-red-500 hover:underline">Gluten-free just for you!</a>
+            <img src="{{ asset('storage/images/recipes/glutenfree.png') }}" alt="Gluten-free recipes" class="flex flex-col items-center object-cover w-full h-[85%]">
+            <a href="{{ url('/recipes/gluten-free') }}" class="mt-2 text-center text-red-500 hover:underline">Gluten-free just for you!</a>        
         </div>
     </div>
 

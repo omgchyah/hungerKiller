@@ -189,8 +189,8 @@ class RecipeController extends Controller
 
     public function veganRecipes()
     {
-        $recipes = Recipe::where('restriction', 'vegan')->paginate(10);
-        return view('recipes.search', ['recipes' => $recipes, 'title' => 'Easy Recipes']);
+        $recipes = Recipe::where('restrictions', 'vegan')->paginate(10);
+        return view('recipes.search', ['recipes' => $recipes, 'title' => 'Vegan Recipes']);
     }
 
     public function easyRecipes()
@@ -201,7 +201,7 @@ class RecipeController extends Controller
 
     public function glutenFreeRecipes()
     {
-        $recipes = Recipe::where('restriction', 'gluten-free')->paginate(10);
+        $recipes = Recipe::where('restrictions', 'gluten-free')->paginate(10);
         return view('recipes.search', ['recipes' => $recipes, 'title' => 'Gluten-Free Recipes']);
     }
 
